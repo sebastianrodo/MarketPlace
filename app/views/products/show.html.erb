@@ -1,0 +1,33 @@
+<div  class="container shadow background-white"
+      style="width: 1200px;
+            height: 100%;
+            border-radius: 5px;">
+  <h1 class="top-space be-yellow"><%= @product.name %></h1>
+  <div class="row top-space bottom-space">
+    <div class="col-8">
+
+      <div  class="fotorama"
+            data-transition="dissolve"
+            data-loop="true"
+            data-autoplay="2000"
+            data-nav="thumbs"
+            data-stopautoplayontouch="false"
+            data-keyboard="true">
+        <% @images.each do |img| %>
+          <img src="<%=img.image.url()%>">
+        <% end %>
+      </div>
+    </div>
+    <div class="col-4">
+      <label class="top-space be-red">Price</label>
+      <h4 class="be-success-green">$ <%= @product.price %></h4>
+
+      <label class="top-space be-red">Quantity</label>
+      <h5><%= @product.quantity %></h5>
+
+      <label class="top-space be-red">Description</label>
+      <h5 class="bottom-space"><%= @product.description %></h5>
+      <button type="button" class="btn btn-success">BUY NOW</button>
+    </div>
+  </div>
+</div>

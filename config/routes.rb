@@ -1,3 +1,13 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+
+  resources :users
+  resources :products
+  resources :categories
+
+  root to: "products#index"
+  put "/products/:id/archive" => "products#archive"
+  put "/products/:id/publish" => "products#publish"
+  get "/my_products", to: "products#my_products", as: :my_products
 end
