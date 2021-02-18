@@ -1,0 +1,34 @@
+<div style="width: 45%;
+            height: 100%;
+            margin-top: 3em;"
+      class="container-fluid form-style background-white shadow">
+  <div class="top-space bottom-space">
+    <h1 class="text-center color-secondary">Log in</h1>
+    <div >
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control", placeholder:"email" %>
+        </div>
+
+        <div class="field top-space">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "current-password", class:"form-control", placeholder:"password" %>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="field top-space">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
+
+        <div class="actions top-space bottom-space">
+          <%= f.submit "Log in", class:"btn col be-white color-secondary-bg" %>
+        </div>
+      <% end %>
+    </div>
+    <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
+    <center><%= render "devise/shared/links", class:"top-space" %></center>
+  </div>
+</div>

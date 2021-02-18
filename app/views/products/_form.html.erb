@@ -1,0 +1,45 @@
+<h1 class="text-center color-secondary top-space-xs"><%= name %> PRODUCT</h1>
+<%= form_with(model: @product, local: true, html: { id: "edit_product_form" }) do |form| %>
+  <div class="form-group col-md">
+    <%= form.label :name %><br/>
+    <%= form.text_field :name, class:"form-control", placeholder:"Product Name", required:"required" %>
+
+    <%= form.label :description %><br/>
+    <%= form.text_area :description,  class:"form-control",
+                                      placeholder:"Product description",
+                                      required:"required"%>
+
+    <div class="form-row top-space">
+      <div class="form-group col-md-6">
+        <%= form.label :quantity %><br/>
+        <%= form.text_field :quantity,  class:"form-control",
+                                        placeholder:"Product quantity",
+                                        required:"required"%>
+      </div>
+
+      <div class="form-group col-md-6">
+        <%= form.label :price %><br/>
+        <%= form.text_field :price, class:"form-control", placeholder:"Product price", required:"required" %>
+      </div>
+
+      <div class="form-group col-md-6">
+        <%= form.label :category %><br/>
+        <% category_array = Category.all.map { |category| [category.name, category.id] } %>
+        <%= form.select(:category_id, options_for_select(category_array),
+                            { },
+                            { :class => 'form-control' }) %>
+      </div>
+
+      <div class="form-group col-md-6">
+        <%= form.label :image %><br/>
+          <%= form.fields_for :images do |image| %>
+            <%= render 'image_fields', f: image %>
+          <% end %>
+        <div class="links">
+          <%= link_to_add_association "Add other image", form, :images %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= form.submit "Save", class:"btn be-white color-secondary-bg"%>
+<%end%><br>
